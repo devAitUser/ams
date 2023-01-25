@@ -1,1 +1,1 @@
-# ams
+# eej_app
