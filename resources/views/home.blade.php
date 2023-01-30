@@ -56,6 +56,13 @@
                   </span>
                   <span class="label_menu _left"> Rechercher un dossier </span>
                </li>
+
+               <li class="link_menu__left" onclick="window.open('{{url('create__inventaire')}}', '_self');">
+                  <span class="icon_menu_left" >
+                  <img src="{{ asset('img_app/icons8-nouveau-produit-48.png') }}" style="width: 20px;">
+                  </span>
+                  <span class="label_menu _left"> Inventaire </span>
+               </li>
           
                {{-- <li class="link_menu__left">
                   <span class="icon_menu_left" >

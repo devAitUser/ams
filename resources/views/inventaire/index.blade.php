@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-
 <script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
 
 	<link rel="stylesheet" href="https://cdn.materialdesignicons.com/5.0.45/css/materialdesignicons.min.css">
@@ -35,31 +34,35 @@
    #organigramme_table_wrapper {
     margin-bottom: 15px;
    }
-   .panel-heading {
+
+  
+    .panel-heading {
     width: 80% !important;
-   }
-   table.table-bordered.dataTable tbody th, table.table-bordered.dataTable tbody td {
-    
-        text-transform: uppercase;
-    }
+     }
+     .table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th {
+            border: 1px solid #ddd;
+            vertical-align: unset !important;
+        }
 </style>
 
 
 
-    
-      <div class="panel-heading">  Les plans de classements  </div>
+      <div class="panel-heading">   
+        Les utilisateurs
+     </div>
       <div class="panel_view_details">
          <div class="table_p">
 
             <div class="block_manager_datable">
-                <a href="#" class="create_organi" aria-label="Close" data-toggle="modal" data-target="#exampleModal">creer un plan de classement </a>
+                <a  href="#" class="create_organi" aria-label="Close" aria-label="Close" data-toggle="modal" data-target="#model_create" >Nouveau un inventaire </a>
             </div>
 
             <table id="organigramme_table" class=" table table-bordered text-center styled-table">
                <thead>
                    <tr>
-                       <th scope="col">Num</th>
-                       <th scope="col">Nom plan de classement</th>
+                       <th scope="col">Numero</th>
+                       <th scope="col">Nom</th>
+                      
                        <th scope="col">Action  </th>
 
 
@@ -95,23 +98,19 @@
 
          </div>
 
+         
+
 
       </div>
-
-
-
-
-
-
-
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      
+       <!-- Modal -->
+  <div class="modal fade" id="model_create" tabindex="-1" role="dialog" aria-labelledby="model_create" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <form  method="post" action="{{url('create_organigramme')}}">
+        <form  method="post" action="{{url('create_inventaire')}}">
             @csrf
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Créer un plan de classement</h5>
+          <h5 class="modal-title" id="exampleModalLabel">créer un inventaire </h5>
           <button type="button" class="close" data-dismiss="modal" >
 
           </button>
@@ -121,8 +120,8 @@
 
 
                     <div class="form-group">
-                      <label for="nom_organigramme"> Ajouter le plan de classement </label>
-                      <input type="text" class="form-control" name="nom_organigramme"  id="nom_organigramme"  placeholder="Nom du plan de classement" required="">
+                      <label for="nom_organigramme"> Ajouter un inventaire  </label>
+                      <input type="text" class="form-control" name="nom_inventaire"  id="nom_inventaire"  placeholder="Nom du plan de classement" required="">
 
                     </div>
 
@@ -142,24 +141,7 @@
   </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   <script src="{{asset('assets/js/datatables.min.js')}}"></script>
-      <script src="{{asset('assets/js/datatable_plan_classement.js')}}"></script>
+      <script src="{{asset('assets/js/datatables.min.js')}}"></script>
+      <script src="{{asset('assets/js/datatable_iventaire.js')}}"></script>
 
 @endsection

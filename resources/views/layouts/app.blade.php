@@ -109,6 +109,16 @@
                      </li>
 
 
+                     <li class="icon_menu   {{ request()->is('inventaire')  ? 'active' : '' }} " data-bs-toggle="tooltip" data-bs-placement="top" title="inventaire">
+                        <a href="{{route('inventaire')}}">
+                        <span class="material-icons">
+                           inventory
+                        </span>
+                        </a>
+
+                     </li>
+
+
                    
                      @if (Auth::user()->hasPermissionTo('Gestion des prets')) 
                         <li class="icon_menu   {{ request()->is('prets')  ? 'active' : '' }} " data-bs-toggle="tooltip" data-bs-placement="top" title="Gestion des prets">

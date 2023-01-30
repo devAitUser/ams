@@ -242,3 +242,20 @@ Route::post('/prets_delete/{id}', [App\Http\Controllers\PretsController::class, 
 
 Route::get('/inventaire', [App\Http\Controllers\InventaireController::class, 'index'])->name('inventaire');
 
+Route::get('/all_inventaire', [App\Http\Controllers\InventaireController::class, 'all_inventaire'])->name('all_inventaire');
+
+Route::post('/create_inventaire', [App\Http\Controllers\InventaireController::class, 'create']);
+Route::post('/inventaire_destroy/{id}', [App\Http\Controllers\InventaireController::class, 'delete']);
+
+Route::get('/inventaire_edit/{id}', [App\Http\Controllers\InventaireController::class, 'edit'])->name('inventaire_edit');
+Route::post('/store_inventaire', [App\Http\Controllers\InventaireController::class, 'store']);
+
+Route::post('/delete_inventaire', [App\Http\Controllers\InventaireController::class, 'delete_inventaire']);
+
+
+Route::get('/create__inventaire', [App\Http\Controllers\InventaireController::class, 'create_inventaire']);
+
+
+Route::post('/store_inventaire_table', [App\Http\Controllers\InventaireController::class, 'store_inventaire']);
+
+Route::post('/delete_value_field', [App\Http\Controllers\InventaireController::class, 'delete_value_field']);
