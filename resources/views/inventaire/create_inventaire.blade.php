@@ -170,7 +170,10 @@
       
    
 
-      <script src="{{asset('assets/js/iventaire.js')}}"></script>
       
+
+      <script src="{{asset('assets/js/datatables.min.js')}}"></script>
+      <script src="{{asset('assets/js/dossier_table_iventaire.js')}}"></script>
+      <script src="{{asset('assets/js/iventaire.js')}}"></script>
 
 @endsection
