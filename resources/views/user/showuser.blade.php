@@ -146,6 +146,22 @@
                      </div>
                      <div class="row_project_panel">
                         <div id="row0" class="row mb-3">
+                           <label for="select_project" class="col-md-4 col-form-label text-md-end">Les inventaires  </label>
+                           <div class="col-md-6">
+                              <select id=""  class=" form-control " name="id_iventaire">
+                                 <option value="">Selectionner</option>
+                                 <?php for($i=0;$i<count($inventaire);$i++){ ?>
+                                    <?php if($inventaire[$i]['id'] == $user->id_inventaire ){ ?>
+                                    <option value="<?php echo $inventaire[$i]['id']; ?>"><?php echo $inventaire[$i]['nom']; ?></option>
+                                 <?php  } else { ?>
+                                    <option value="<?php echo $inventaire[$i]['id']; ?>" selected><?php echo $inventaire[$i]['nom']; ?></option>
+                                 <?php  } ?>
+                                 <?php  } ?>
+                              </select>
+                           </div>
+                        </div>
+                     <div class="row_project_panel">
+                        <div id="row0" class="row mb-3">
                            <label for="select_project" class="col-md-4 col-form-label text-md-end">Les Projets  </label>
                            <div class="col-md-6">
                               <select id="select_project" multiple="multiple"  class=" form-control ">

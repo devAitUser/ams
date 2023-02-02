@@ -8,6 +8,7 @@ use App\Models\Field_inventaire;
 
 use App\Models\Field_table_inventaire;
 use App\Models\Value_field;
+use Illuminate\Support\Facades\Auth;
 
 class InventaireController extends Controller
 {
@@ -102,10 +103,12 @@ class InventaireController extends Controller
         $array_table_inventaires = array();
         $array_field_value =array();
 
-        $field_inventaire = Field_inventaire::where(["inventaire_id" => 1 ])->get();
+        $user = Auth::user();
+
+        $field_inventaire = Field_inventaire::where(["inventaire_id" => $user->id_inventaire ])->get();
 
 
-        $Field_table_inventaire = Field_table_inventaire::where(["inventaire_id" => 1 ])->get();
+        $Field_table_inventaire = Field_table_inventaire::where(["inventaire_id" => $user->id_inventaire ])->get();
 
         for ($i = 0;$i < count($Field_table_inventaire);$i++)
             {

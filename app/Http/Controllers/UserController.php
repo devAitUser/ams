@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Organigramme;
 use App\Models\Projet;
+
+use App\Models\Inventaire;
 use App\Models\Projet_modifier;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Http\Request;
@@ -133,6 +135,8 @@ class UserController extends Controller
 
         $this->authorize('permission_user');
 
+        
+         $inventaire =  Inventaire::all();
 
          $organigrammes=Organigramme::all();
          $roles=Role::all();
@@ -168,7 +172,7 @@ class UserController extends Controller
 
           
 
-       return view('user.showuser',compact('user','roles','permissions','organigrammes','les_projets' ,'count_projet' ));
+       return view('user.showuser',compact('user','roles','permissions','organigrammes','les_projets' ,'count_projet','inventaire' ));
 
 
     }
@@ -208,7 +212,11 @@ class UserController extends Controller
     
         $user->prenom = $request->prenom;
         $user->telephone = $request->telephone;
-        $user->projet_select_id = 0;
+
+        $user->telephone = $request->telephone;
+
+
+        $user->id_inventaire = $request->id_iventaire;
         if($request->email != '' ){
             $user->email = $request->email;
         }
