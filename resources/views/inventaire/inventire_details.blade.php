@@ -107,10 +107,10 @@
   <div class="modal fade" id="model_create" tabindex="-1" role="dialog" aria-labelledby="model_create" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <form  method="post" action="{{url('create_inventaire')}}">
+        <form  method="post" action="{{url('create_inventaire_table')}}">
             @csrf
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">créer un inventaire </h5>
+          <h5 class="modal-title" id="exampleModalLabel">créer  </h5>
           <button type="button" class="close" data-dismiss="modal" >
 
           </button>
@@ -120,8 +120,9 @@
 
 
                     <div class="form-group">
-                      <label for="nom_organigramme"> Ajouter un inventaire  </label>
-                      <input type="text" class="form-control" name="nom_inventaire"  id="nom_inventaire"  placeholder="Nom du plan de classement" required="">
+                      <label for="nom_organigramme"> Ajouter   </label>
+                      <input type="text" value="{{$id}}" name="id_inventaire" hidden>
+                      <input type="text" class="form-control" name="nom_inventaire"  id="nom_inventaire"  placeholder="" required="">
 
                     </div>
 

@@ -36,6 +36,18 @@ class InventaireController extends Controller
         return redirect()
             ->route('inventaire');
     }
+    
+    public function create_inventaire_table(Request $request){
+        $new = new Inventaire_table();
+
+        $new->nom = $request->input('nom_inventaire');
+        $new->id_inventaire = $request->input('id_inventaire');
+        
+        $new->save();
+
+        return redirect()
+            ->route('inventaire_details',$request->input('id_inventaire'));
+    }
     public function delete($id){
 
         $delete= Inventaire::find($id);  
@@ -81,7 +93,7 @@ class InventaireController extends Controller
                 $new_attribut = new Field_inventaire();
                 $new_attribut->nom_champs = $request->new_name_champ[$i];
                 $new_attribut->type_champs = $request->new_type_champ[$i];
-                $new_attribut->inventaire_id = $request->id_inventaire;
+                $new_attribut->id_inventaire_tables = $request->id_inventaire;
                 $new_attribut->save();
             }
         }
