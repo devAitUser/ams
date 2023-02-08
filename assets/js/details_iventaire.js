@@ -51,7 +51,7 @@
     e.preventDefault();
     var id =row
 
-    location.href=APP_URL+'/inventaire_details/' + row ;
+    location.href=APP_URL+'/inventaire_edit/' + row ;
 
 
 
@@ -87,7 +87,7 @@
       });
 
     $.ajax({
-        'url': APP_URL+"/all_inventaire",
+        'url': APP_URL+"/api_inventaire_details/"+id,
         'method': "GET",
         'contentType': 'application/json'
     }).done( function(data) {
@@ -139,5 +139,6 @@
 $(document).ready(function() {
      
     fill_table();
+
 
  } );

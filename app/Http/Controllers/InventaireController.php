@@ -6,6 +6,7 @@ use App\Models\Inventaire;
 use Illuminate\Http\Request;
 use App\Models\Field_inventaire;
 
+use App\Models\Inventaire_table;
 use App\Models\Field_table_inventaire;
 use App\Models\Value_field;
 use Illuminate\Support\Facades\Auth;
@@ -51,7 +52,7 @@ class InventaireController extends Controller
     public function edit($id){
 
           
-           $field_inventaire = Field_inventaire::where(["inventaire_id" => $id])->get();
+           $field_inventaire = Field_inventaire::where(["id_inventaire_tables" => $id])->get();
            $data =array('id'=> $id , 'field_inventaire' => $field_inventaire );
          return view('inventaire.edit',$data);
     }
@@ -162,6 +163,20 @@ class InventaireController extends Controller
             $delet->delete();
         }
        
+
+    }
+    public function inventaire_details($id){
+        $data =array('id'=> $id );
+        return view('inventaire.inventire_details',$data );
+
+
+    }
+    public function api_inventaire_details($id){
+        $table_inventaire = Inventaire_table::where(["id_inventaire" => $id ])->get();;  
+
+    
+        return  Response()
+        ->json($table_inventaire);
 
     }
 }

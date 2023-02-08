@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFieldInventaireTable extends Migration
+class CreateInventaireTablesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateFieldInventaireTable extends Migration
      */
     public function up()
     {
-        Schema::create('field_inventaires', function (Blueprint $table) {
+        Schema::create('inventaire_tables', function (Blueprint $table) {
             $table->id();
-            $table->string('nom_champs');
-            $table->string('type_champs');
-            $table->unsignedBigInteger('inventaire_id');
-            $table->foreign('inventaire_id')->references('id')->on('inventaires')->onDelete('cascade');
+            $table->unsignedBigInteger('id_inventaire');
+            $table->foreign('id_inventaire')->references('id')->on('inventaires')->onDelete('cascade');
+            $table->string('nom');
+
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateFieldInventaireTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('field_inventaire');
+        Schema::dropIfExists('inventaire_tables');
     }
 }
