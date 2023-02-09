@@ -61,6 +61,19 @@ class InventaireController extends Controller
     
     }
 
+    public function delete_details_inventaire($id){
+
+        $delete= Inventaire_table::find($id);  
+        $delete->delete();
+
+        $data = Inventaire_table::all();  
+   
+
+        return  Response()
+        ->json(['etat' => true , 'data' =>  $data    ]);
+    
+    }
+
     public function edit($id){
 
           

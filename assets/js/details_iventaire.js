@@ -8,7 +8,7 @@
           if(confirm('Êtes-vous sûr?')) {
 
                 $.ajax({
-                  url:APP_URL+"/inventaire_destroy/"+row,
+                  url:APP_URL+"/delete_details_inventaire/"+row,
                   method:"POST",
                   data:{
                     items_delete : row

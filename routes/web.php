@@ -251,7 +251,7 @@ Route::get('/all_inventaire', [App\Http\Controllers\InventaireController::class,
 Route::post('/create_inventaire', [App\Http\Controllers\InventaireController::class, 'create']);
 Route::post('/create_inventaire_table', [App\Http\Controllers\InventaireController::class, 'create_inventaire_table']);
 Route::post('/inventaire_destroy/{id}', [App\Http\Controllers\InventaireController::class, 'delete']);
-
+Route::post('/delete_details_inventaire/{id}', [App\Http\Controllers\InventaireController::class, 'delete_details_inventaire']);
 Route::get('/inventaire_edit/{id}', [App\Http\Controllers\InventaireController::class, 'edit'])->name('inventaire_edit');
 Route::post('/store_inventaire', [App\Http\Controllers\InventaireController::class, 'store']);
 
