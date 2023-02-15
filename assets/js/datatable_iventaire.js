@@ -87,7 +87,7 @@
       });
 
     $.ajax({
-        'url': APP_URL+"/all_inventaire",
+        'url': APP_URL+"/table_organigramme",
         'method': "GET",
         'contentType': 'application/json'
     }).done( function(data) {
