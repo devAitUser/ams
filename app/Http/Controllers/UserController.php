@@ -136,7 +136,7 @@ class UserController extends Controller
         $this->authorize('permission_user');
 
         
-         $inventaire =  Inventaire::all();
+         $inventaire =  Organigramme::all();
 
          $organigrammes=Organigramme::all();
          $roles=Role::all();

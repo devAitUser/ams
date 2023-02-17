@@ -120,7 +120,7 @@
                 { "data": "nom"  },
                
                 { "data": "id"  , render: function(data, type, row) {
-                    return '<button type="button" class="btn btn-danger mr-3 " onclick="remove_user(event,' + data + ' )"  >'+button_show+'</button><button type="button" class="btn btn-primary"   onclick="click_edit(event,' + data + ' )" >'+button_delete+'</button>' } 
+                    return '<button type="button" class="btn btn-primary"   onclick="click_edit(event,' + data + ' )" >'+button_delete+'</button>' } 
                 }
 
                  

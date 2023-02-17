@@ -48,11 +48,7 @@
             columns: [ 0, 1, 2,3,4]
           },
         }
-      ],
-      "aoColumnDefs": [
-          { 'bSortable': false, 'aTargets': [0,1,3] }
-      ],
-      responsive: true,
+      ]
   });
 
 }

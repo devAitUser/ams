@@ -15,8 +15,8 @@ class CreateInventaireTablesTable extends Migration
     {
         Schema::create('inventaire_tables', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_inventaire');
-            $table->foreign('id_inventaire')->references('id')->on('inventaires')->onDelete('cascade');
+            $table->unsignedBigInteger('id_organigrammes');
+            $table->foreign('id_organigrammes')->references('id')->on('organigrammes')->onDelete('cascade');
             $table->string('nom');
 
             $table->timestamps();

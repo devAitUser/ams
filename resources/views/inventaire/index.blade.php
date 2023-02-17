@@ -48,14 +48,12 @@
 
 
       <div class="panel-heading">   
-        Les utilisateurs
+        Les inventaires
      </div>
       <div class="panel_view_details">
          <div class="table_p">
 
-            <div class="block_manager_datable">
-                <a  href="#" class="create_organi" aria-label="Close" aria-label="Close" data-toggle="modal" data-target="#model_create" >Nouveau un inventaire </a>
-            </div>
+        
 
             <table id="organigramme_table" class=" table table-bordered text-center styled-table">
                <thead>

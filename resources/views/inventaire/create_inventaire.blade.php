@@ -124,7 +124,7 @@
                <div class="collapse " id="collapse_Formation" style="">
                   <div class="card card-body formation">
                      <h5 class="card-title">NOUVELLE  </h5>
-                     <form method="post" id="field_form"> 
+                     <form id="field_form"> 
                       @csrf
                       <input type="text" value="{{$id_inventaires}}" name="id_inventaires" hidden>
                      <table class="info_p ">

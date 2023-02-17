@@ -258,9 +258,13 @@ Route::post('/store_inventaire', [App\Http\Controllers\InventaireController::cla
 Route::post('/delete_inventaire', [App\Http\Controllers\InventaireController::class, 'delete_inventaire']);
 
 
-Route::get('/create__inventaire', [App\Http\Controllers\InventaireController::class, 'create_inventaire']);
+Route::get('/create__inventaire', [App\Http\Controllers\InventaireController::class, 'create_inventaire'])->name('create__inventaire');
 
+Route::get('/inventaire_choix', [App\Http\Controllers\InventaireController::class, 'inventaire_choix']);
 
 Route::post('/store_inventaire_table', [App\Http\Controllers\InventaireController::class, 'store_inventaire']);
 
 Route::post('/delete_value_field', [App\Http\Controllers\InventaireController::class, 'delete_value_field']);
+
+
+Route::post('/choix_inventaires', [App\Http\Controllers\InventaireController::class, 'choix_inventaires'])->name('choix_inventaires');

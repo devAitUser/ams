@@ -152,9 +152,9 @@
                                  <option value="">Selectionner</option>
                                  <?php for($i=0;$i<count($inventaire);$i++){ ?>
                                     <?php if($inventaire[$i]['id'] == $user->id_inventaire ){ ?>
-                                    <option value="<?php echo $inventaire[$i]['id']; ?>"><?php echo $inventaire[$i]['nom']; ?></option>
-                                 <?php  } else { ?>
                                     <option value="<?php echo $inventaire[$i]['id']; ?>" selected><?php echo $inventaire[$i]['nom']; ?></option>
+                                 <?php  } else { ?>
+                                    <option value="<?php echo $inventaire[$i]['id']; ?>" ><?php echo $inventaire[$i]['nom']; ?></option>
                                  <?php  } ?>
                                  <?php  } ?>
                               </select>

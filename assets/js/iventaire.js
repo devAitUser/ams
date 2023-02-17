@@ -76,8 +76,10 @@ $(document).ready(function() {
         var count_f = 1;
 
 
-
+        alert();
         $('#field_form').on('submit', function(event){
+
+          alert();
 
           
           event.preventDefault();

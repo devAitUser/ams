@@ -9,7 +9,9 @@ use App\Models\Field_inventaire;
 use App\Models\Inventaire_table;
 use App\Models\Field_table_inventaire;
 use App\Models\Value_field;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+
 
 class InventaireController extends Controller
 {
@@ -40,8 +42,8 @@ class InventaireController extends Controller
     public function create_inventaire_table(Request $request){
         $new = new Inventaire_table();
 
-        $new->nom = $request->input('nom_inventaire');
-        $new->id_inventaire = $request->input('id_inventaire');
+        $new->nom           = $request->input('nom_inventaire');
+        $new->id_organigrammes = $request->input('id_inventaire');
         
         $new->save();
 
@@ -131,10 +133,10 @@ class InventaireController extends Controller
 
         $user = Auth::user();
 
-        $field_inventaire = Field_inventaire::where(["inventaire_id" => $user->id_inventaire ])->get();
+        $field_inventaire = Field_inventaire::where(["id_inventaire_tables" => $user->id_choix_inventaire ])->get();
 
 
-        $Field_table_inventaire = Field_table_inventaire::where(["inventaire_id" => $user->id_inventaire ])->get();
+        $Field_table_inventaire = Field_table_inventaire::where(["inventaire_id" => $user->id_choix_inventaire ])->get();
 
         for ($i = 0;$i < count($Field_table_inventaire);$i++)
             {
@@ -150,10 +152,20 @@ class InventaireController extends Controller
 
             }
 
-        $data = array( 'field_inventaires' => $field_inventaire , 'id_inventaires' => 1 , 'array_table_inventaires' => $array_table_inventaires );
+        $data = array( 'field_inventaires' => $field_inventaire , 'id_inventaires' => $user->id_choix_inventaire , 'array_table_inventaires' => $array_table_inventaires );
         
         return view('inventaire.create_inventaire',$data);
        
+    }
+    public function inventaire_choix(){
+
+        $user = Auth::user();
+
+        $table_inventaires = Inventaire_table::where(["id_organigrammes" => $user->id_inventaire ])->get();
+
+        $data = array( 'inventaires' => $table_inventaires );
+
+        return view('inventaire.inventaire_choix',$data);
     }
     public function store_inventaire(Request $request){ 
 
@@ -197,11 +209,22 @@ class InventaireController extends Controller
 
     }
     public function api_inventaire_details($id){
-        $table_inventaire = Inventaire_table::where(["id_inventaire" => $id ])->get();;  
+        $table_inventaire = Inventaire_table::where(["id_organigrammes" => $id ])->get();;  
 
     
         return  Response()
         ->json($table_inventaire);
+
+    }
+    public function choix_inventaires(Request $request){
+
+        $choix_inventaire = $request->choix_inventaire;
+        $user = Auth::user();
+        $upd = User::find($user->id);
+        $upd->id_choix_inventaire = $choix_inventaire;
+        $upd->save();
+
+        return redirect(route("create__inventaire"));
 
     }
 }
