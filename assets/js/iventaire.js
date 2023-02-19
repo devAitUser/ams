@@ -76,48 +76,8 @@ $(document).ready(function() {
         var count_f = 1;
 
 
-        alert();
-        $('#field_form').on('submit', function(event){
-
-          alert();
-
-          
-          event.preventDefault();
-          
-          $.ajaxSetup({
-            headers: {
-              'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
-            }
-          });
-          
-            $.ajax({
-             url:APP_URL+"/store_inventaire_table",
-             method:"POST",
-             data:$(this).serialize(),
-             success:function(data){
-
-
-              var add_row = '<tr>';
-            
-              
-
-              for (i = 0; i < data.champs.length; i++) { 
-
-                   add_row += '<td>' + data.champs[i] + '      </td>';
-
-              }
-         
-              add_row += '<td><a href="" class="prevent-default" onClick="removeRow(event,1)" ><i class="fa-solid fa-circle-xmark text-danger text-19  font-weight-700 btn_close"></i></a></td></tr>';
-              $("#table tbody").append(add_row);
+      
         
-              $("#btn_F").click();
-           
-   
-              
-       
-             }
-            })
-         });
 
         
 
