@@ -75,8 +75,7 @@ img.logo_css {
 .header_panel_view {
   display: flex;
   justify-content: space-between;
-  margin-top: 25px;
-  margin-bottom: 10px;
+
 }
 
 .panel_view_bottom {

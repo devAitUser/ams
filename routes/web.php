@@ -268,3 +268,10 @@ Route::post('/delete_value_field', [App\Http\Controllers\InventaireController::c
 
 
 Route::post('/choix_inventaires', [App\Http\Controllers\InventaireController::class, 'choix_inventaires'])->name('choix_inventaires');
+
+/*****  salle *****/
+
+Route::get('/salle', [App\Http\Controllers\SalleController::class, 'index'])->name('salle');;
+Route::get('/api_site', [App\Http\Controllers\SalleController::class, 'all_Site']);
+Route::post('/salle_store', [App\Http\Controllers\SalleController::class, 'store']);
+Route::post('/delete_salle', [App\Http\Controllers\SalleController::class, 'delete']);
