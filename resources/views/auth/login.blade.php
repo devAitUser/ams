@@ -14,7 +14,7 @@
 
 <div class="main-content">
 
-        <img src="{{ asset('assets/img/AMSlogo.png') }}" class="logo_login">
+        <img src="{{ asset('assets/img/anp.png') }}" class="logo_login">
 
         <div class="block_login">
             <form method="POST" action="{{ route('login') }}">

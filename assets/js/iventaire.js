@@ -82,59 +82,7 @@ $(document).ready(function() {
         
 
 
-        $(".btn_valide_f").click(function(e) {
-
-
-          e.preventDefault();
-
-
-          
   
-          var check_input_validate = true;
-
-          
-  
-          var input_diplome = $("#diplome_f").val();
-          var input_specialites = $("#intitule").val();
-          var input_option = $("#input_option").val();
-          var input_annee_obtention = $("#datepicker_obtention").val();
-  
-          var date_naissance = $("#date_naissance").val();
-  
-  
-          var start = new Date(date_naissance);
-          var year_user = start.getFullYear();
-  
-          var cal_year = input_annee_obtention - year_user;
-  
-         
-
-                          var add_row = '<tr id=row_f' + count_f + '><td> <input type="hidden" name="f_diplome[]" value="' + input_diplome + '" > ' + input_diplome + ' ';
-  
-  
-                          add_row += '</td>';
-  
-  
-                          add_row += '<td> <input type="hidden" name="f_specialites[]" value="' + input_specialites + '" >   '  + input_specialites + '</td>';
-                          add_row += '<td> <input type="hidden" name="f_option[]" value="' + input_option + '" >  ' + input_option + '</td>';
-                          add_row += '<td> <input type="hidden" name="f_annee_obtention[]" value="' + input_annee_obtention + '" > ' + input_annee_obtention + '</td>';
-                          add_row += '<td><a href="" class="prevent-default" onClick="removeRow_f(event,' + count_f + ')" ><i class="fa-solid fa-circle-xmark text-danger text-19  font-weight-700 btn_close"></i></a></td></tr>';
-  
-  
-  
-
-                          $("#table_formation tbody").append(add_row);
-  
-                          count_f++;
-                          tableLength_f++;
-
-  
-                          $("#btn_F").click();
-  
-                          $("#option").val('');
-                          $("#datepicker_obtention").val('');
-  
-      });
 
       
       $('.btn_add_oranigramme').on('click', function(event){

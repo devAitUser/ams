@@ -373,49 +373,27 @@ class DossierController extends Controller
         }
 
       
-        if($request->file != null){
-            for($i=0;$i<count($request->file);$i++){
+            for ($i = 0; $i < count($request->nom_champ_file); $i++) {
+                if ($request->nom_champ_file[$i] != null) {
+                    $attributs_dossier1 = new Attributs_dossier();
+                    $attributs_dossier1->nom_champs =
+                        $request->nom_champ_file[$i];
+                    $attributs_dossier1->valeur = 'Fichier';
+                    $attributs_dossier1->type_champs = "Fichier" ;
+                    $attributs_dossier1->dossier_id = $dossier->id;
+                    $attributs_dossier1->save();
 
-                            
-                    if($request->file[$i] != null){
-                    
-                
-                        $attributs_dossier1 = new Attributs_dossier();
-                        $attributs_dossier1->nom_champs  =  $request->nom_champ_file[$i];
-                        $attributs_dossier1->valeur      =  $request->file('file')[$i]->store('files') ;
-                        $attributs_dossier1->type_champs =   'Fichier' ;
-                        $attributs_dossier1->dossier_id  =   $dossier->id;
-                        $attributs_dossier1->save();
-
-
-                        if($attributs_dossier1->valeur != ''){
-
-                          
-                    
-                            $file =  new File_searche();
-                            $file->filename   =  $attributs_dossier1->nom_champs ;
-                            $file->content    =  $request->file_text[$i] ;
-                            $file->dossier_id =  $dossier->id;
-                            $file->attributs_dossiers_id =  $attributs_dossier1->id;
-                            $file->projet_id =  $request->id_organigramme ;
-                            $file->save();
-
-
-                           
-                           
+                    if ($request->text_objet[$i] != "" ) {
                         
-                            
-
-                        }
-                     
-                        
+                        $file_champ = new File_champ();
+                        $file_champ->champs_id =$attributs_dossier1->id;
+                        $file_champ->name_file =  $request->file("file")[$i]->store("files");
+                        $file_champ->file = $request->text_objet[$i];
+                        $file_champ->date = $request->date_file[$i];
+                        $file_champ->save();
                     }
-                                
-                
-        
-
+                }
             }
-        }
     
         Session::flash('show_dossier','content');
 

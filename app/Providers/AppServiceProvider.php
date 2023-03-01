@@ -96,6 +96,8 @@ class AppServiceProvider extends ServiceProvider
       
 
         View::composer('layouts.app', function ($view) {
+          $dossiers =  '';
+          $nom_projet=  '';
           $user = Auth::user();
           $projet_select_id = $user->projet_select_id;
           $nom_projet = "";
@@ -103,9 +105,15 @@ class AppServiceProvider extends ServiceProvider
             if($projet_select_id != NULL) {
           
             $organigramme = Organigramme::find($projet_select_id);
+
+
+            if($organigramme != null){
+              $dossiers = $organigramme->dossiers;
+              $nom_projet = $organigramme->nom;
+            }
             
-            $dossiers = $organigramme->dossiers;
-            $nom_projet = $organigramme->nom;
+           
+            
             
             }
             $view->with('role_name', $nom_projet );

@@ -30,7 +30,7 @@
          <script src="{{ asset('assets/js/home_app.js') }}"></script>
       <!-- CSRF Token -->
       <meta name="csrf-token" content="{{ csrf_token() }}">
-      <title>{{ config('app.name', 'GESTION DES DOCUMENTS ANP') }}</title>
+      <title>{{ config('app.name', 'CRI') }}</title>
 
       <script type="text/javascript">
       var APP_URL = {!! json_encode(url('/')) !!}
@@ -58,9 +58,58 @@
          <div class="main-content">
             <div class="panel_view_header">
                <div class="header_panel_view">
-                  <div class="card-header">
-                     <img src="{{ asset('assets/img/AMSlogo.png') }}" class="logo_css">
-                  </div>
+               
+               
+
+               <nav class="my-2 my-md-0 mr-md-3">
+             <li class="icon_menu    " data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="">
+                    <p class="top_header"> <strong>Entité :</strong>  <a class="name_division" href="#">{{$role_name}} </a> </p>
+                     </li>
+              
+                 
+
+                                     
+                 
+   
+
+                  
+                     
+
+                  
+
+               
+
+
+                      
+                     <li class="icon_menu  link_dropdown  {{ request()->is('user_profile')  ? 'active' : '' }} " data-bs-toggle="tooltip" data-bs-placement="top" title="">
+                        <a href="{{route('user_profile')}}" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="material-icons">manage_accounts</span>
+                        </a>
+                        Mon Profil
+                        <ul class="dropdown-menu dropdown" aria-labelledby="dropdownMenuButton1" style="">
+                           <li><a class="dropdown-item" href="#">Utilisateur : <strong>{{$name_user}}</strong>  </a></li>
+                           <li><a class="dropdown-item" href="{{route('user_profile')}}">Mon Profil</a></li>
+                          
+                        </ul>
+                     </li>
+                     
+                     <li class="icon_menu " data-bs-toggle="tooltip" data-bs-placement="top" title="">
+                        
+                        <a href="{{route('logout') }}" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+                           <span class="material-icons">
+                              logout
+                           </span> </a>
+                           <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                              @csrf
+                           </form>
+                           Quitter
+                        </li>
+             </nav>
+
+
+            
 
                
 
@@ -71,6 +120,19 @@
 
   background: #155ea4;
 
+
+}
+
+a.name_division {
+    text-decoration: none;
+}
+
+.icon_menu a {
+    margin: 0 auto;
+}
+
+li.icon_menu {
+    display: grid;
 
 }
 
@@ -93,40 +155,28 @@
   border-left-color: #f00 !important;
 }
 
+.header_panel_view {
 
+    direction: rtl;
+    margin-right: 100px;
+}
+
+p.top_header {
+    font-size: 16px;
+    margin-bottom: 0px !important;
+    margin-top: 10px;
+}  
+
+@media (min-width: 768px) {
+.mr-md-auto, .mx-md-auto {
+    margin-right: auto!important;
+}}
 
    </style>
               
                   <ul class="hdMnu">
-                     <li class="badge_role"> <h6>  <span class="badge bg-danger"> Division : {{$role_name}} </span></h6></li>
-                     <li class="icon_menu   {{ request()->is('home')  ? 'active' : '' }} " data-bs-toggle="tooltip" data-bs-placement="top" title="Accueil">
-                        <a href="{{route('home')}}">
-                        <span class="material-icons">
-                        home
-                        </span>
-                        </a>
-
-                     </li>
-
-
-                     <li class="icon_menu   {{ request()->is('inventaire')  ? 'active' : '' }} " data-bs-toggle="tooltip" data-bs-placement="top" title="inventaire">
-                        <a href="{{route('inventaire')}}">
-                        <span class="material-icons">
-                           inventory
-                        </span>
-                        </a>
-
-                     </li>
-
-
-                   
-                     @if (Auth::user()->hasPermissionTo('Gestion des prets')) 
-                        <li class="icon_menu   {{ request()->is('prets')  ? 'active' : '' }} " data-bs-toggle="tooltip" data-bs-placement="top" title="Gestion des prets">
-                           <a href="{{route('prets')}}">
-                           <span class="material-icons">file_open</span>
-                           </a>
-                        </li>
-                     @endif
+                    
+                  
 
                      <style>
                         .link-dropdown:hover .dropdown {
@@ -136,55 +186,89 @@
                            -ms-transform: translateY(-10px);
                            transform: translateY(-10px);
                            }
+                           nav.menu {
+                              margin: 0 auto;
+                           }
                      </style>
 
 
                   
            
-                     <li class="icon_menu  link_dropdown  {{ request()->is('user_profile')  ? 'active' : '' }} " data-bs-toggle="tooltip" data-bs-placement="top" title="Mon Profil">
-                        <a href="{{route('user_profile')}}" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="material-icons">manage_accounts</span>
-                        </a>
+                    
 
-                        <ul class="dropdown-menu dropdown" aria-labelledby="dropdownMenuButton1" style="">
-                           <li><a class="dropdown-item" href="#">Utilisateur : <strong>{{$name_user}}</strong>  </a></li>
-                           <li><a class="dropdown-item" href="{{route('user_profile')}}">Mon Profil</a></li>
-                          
-                        </ul>
+                    
+
+                  
+                  </ul>
+
+               </div>
+            </div>
+         
+            <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+             <h5 class="my-0 mr-md-auto font-weight-normal"><img src="{{ asset('assets/img/anp.png') }}" class="logo_css"></h5>
+             <nav class="my-2 my-md-0 mr-md-3">
+             <a class="pic_archive" href="#"> <img src="{{ asset('assets/img/archive.png') }}" class=""></a>
+             </nav>
+         
+             
+            </div>
+
+            <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+             
+             <nav class="menu">
+             <li class="icon_menu   {{ request()->is('home')  ? 'active' : '' }} " data-bs-toggle="tooltip" data-bs-placement="top" title="">
+                        <a href="{{route('home')}}">
+                        <span class="material-icons">
+                        home
+                        </span>
+                        </a>
+                        Accueil
                      </li>
 
+
+                     <li class="icon_menu   {{ request()->is('inventaire')  ? 'active' : '' }} ">
+                        <a href="{{route('inventaire')}}">
+                        <span class="material-icons">
+                           inventory
+                        </span>
+                        </a>
+                        inventaire
+                     </li>
+   
+               
+
                      @if (Auth::user()->hasPermissionTo('Valider la suppression')) 
-                     <li class="icon_menu   {{ request()->is('request_delete_dossier')  ? 'active' : '' }} " data-bs-toggle="tooltip" data-bs-placement="top" title="les demandes de suppression ">
+                     <li class="icon_menu   {{ request()->is('request_delete_dossier')  ? 'active' : '' }} " >
                         <a href="{{route('request_delete_dossier')}}">
                         <span class="material-icons">rule_folder</span>
                         </a>
+                        les demandes de suppression
                      </li>
                      @endif
                 
                  
    
-                     @if (Auth::user()->hasRole('admin')) 
-                     <li class="icon_menu   {{ request()->is('user_list')  ? 'active' : '' }} " data-bs-toggle="tooltip" data-bs-placement="top" title="Gestion des utilisateurs">
-                        <span class="material-icons">
-                        <a href="{{route('user_list') }}">
-                           
 
-                           <span class="material-icons">group_add</span>
-                        
+                     @if (Auth::user()->hasRole('admin')) 
+                     <li class="icon_menu   {{ request()->is('user_list')  ? 'active' : '' }} " data-bs-toggle="tooltip" data-bs-placement="top" title="">
+                        <a href="{{route('user_list') }}" >
+                        <span class="material-icons">group_add</span>
                         </a>
-                        </span>
+                        Gestion des utilisateurs
+                       
                      </li>
                      @endif
                 
                    
                      @if (Auth::user()->hasPermissionTo('Modifier le plan de classement') || Auth::user()->hasPermissionTo('Visualiser le plan de classement')  ) 
-                     <li class="icon_menu  {{ request()->is('organigramme')  ? 'active' : '' }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Plan de classement">
+                     <li class="icon_menu  {{ request()->is('organigramme')  ? 'active' : '' }}" data-bs-toggle="tooltip" data-bs-placement="top" title="">
                         <a href="{{route('home_organigramme')}}">
                            <span class="material-icons  ">
                            account_tree
                            </span>
 
                          </a>
+                         Plan de classement
                      </li>
                      @endif
 
@@ -195,44 +279,28 @@
 
 
                      @if (Auth::user()->hasRole('admin')) 
-                     <li class="icon_menu  {{ request()->is('roles')  ? 'active' : '' }}  "  data-bs-toggle="tooltip" data-bs-placement="top" title="Gestion des roles">
+                     <li class="icon_menu  {{ request()->is('roles')  ? 'active' : '' }}  "  data-bs-toggle="tooltip" data-bs-placement="top" title="">
                      <a href="{{route('roles.index') }}">
                         <span class="material-icons">
                         rule
                         </span> </a>
+                        Gestion des rôles
                      </li>
                      @endif
 
-                     <li class="icon_menu " data-bs-toggle="tooltip" data-bs-placement="top" title="Quitter">
-                        
-                        <a href="{{route('logout') }}" href="{{ route('logout') }}"
-                        onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();">
-                           <span class="material-icons">
-                              logout
-                           </span> </a>
-                           <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                              @csrf
-                           </form>
-                        </li>
-
-                    
-
-                  
-                  </ul>
-
-               </div>
+                
+             </nav>
+             
             </div>
-            <div class="panel_view">
-               <img src="{{ asset('assets/img/LOGO_MENU.png') }}" class="logo_menu">
-            </div>
+
+
             <div class="panel_view_bottom">
 
                  @yield('content')
 
             </div>
             <footer class="mt-auto block_footer">
-               <p>Copyright 2022 - <strong>ANP</strong> – Tous droits réservés </p>
+               <p>Copyright 2022 - <strong>MASTER ARCHIVES</strong> – Tous droits réservés </p>
              </footer>
          </div>
       </div>

@@ -75,42 +75,51 @@ class HomeController extends Controller
 
         $nom_projet='';
 
+        $dossiers =  '';
+          $nom_projet=  '';
+
         if($user->projet_select_id != NULL) {
 
 
             $projet_select_id = $user->projet_select_id;
 
             $organigramme = Organigramme::find($projet_select_id);
-            $dossiers = $organigramme->dossiers;
-            $nom_projet = $organigramme->nom;
-            $Count = $dossiers->count();
-
-            $ckeck_select = true;
-
-
-            $date_current = date('m/d/Y h:i:s a', time());
+            if($organigramme != null){
+                $dossiers = $organigramme->dossiers;
+                $nom_projet = $organigramme->nom;
+                $Count = $dossiers->count();
+                $ckeck_select = true;
 
 
-            $parse_date_current = Carbon::parse($date_current);
-
-            $convert_date_current = $parse_date_current->format('Y-m-d');
-
-            $dossier_indexe = Dossier::where([
-                'organigramme_id' =>  $organigramme->id ,
-                'user_id' =>  $user->id,
-           
-                ])->get();
+                $date_current = date('m/d/Y h:i:s a', time());
 
 
-                for($i=0;$i<count($dossier_indexe);$i++){
-                    $createdAt = Carbon::parse($dossiers[$i]->created_at);
-                    $date_create_dossier = $createdAt->format('Y-m-d');
-                    if($date_create_dossier ==  $convert_date_current ){
-                        $count_dossier_indexé++;
+                $parse_date_current = Carbon::parse($date_current);
+
+                $convert_date_current = $parse_date_current->format('Y-m-d');
+
+                $dossier_indexe = Dossier::where([
+                    'organigramme_id' =>  $organigramme->id ,
+                    'user_id' =>  $user->id,
+            
+                    ])->get();
+
+
+                    for($i=0;$i<count($dossier_indexe);$i++){
+                        $createdAt = Carbon::parse($dossiers[$i]->created_at);
+                        $date_create_dossier = $createdAt->format('Y-m-d');
+                        if($date_create_dossier ==  $convert_date_current ){
+                            $count_dossier_indexé++;
+                        }
+                        
+
                     }
-                    
 
-                }
+              }
+ 
+            
+
+            
 
             
           

@@ -2,17 +2,126 @@ var count = 2;
 var all_index = [];
 
 
-function load_name_File(event, id_file) {
-
-
-    let file = event.target.files[0].name
-
-    const Array_file = file.split(".");
-    let x = Array_file[0];
-
-    $('#Objet_file'+id_file).val(file);
-
-}
+function loadFile(event,id_file){
+    event.preventDefault();
+  
+  
+    
+    var output = document.getElementById('output');
+      output.src = URL.createObjectURL(event.target.files[0]);
+      output.onload = function() {
+        URL.revokeObjectURL(output.src+'#toolbar=1') // free memory
+        console.log(output.src+'#toolbar=0&navpanes=0&scrollbar=0')
+      }
+    var form_data = new FormData();
+    form_data.append("data", event.target.files[0]);
+    var link_file ;
+    $.ajax({
+        'async': false,
+        url: APP_URL+'/uploud_pdf_temp', // router
+        method:"POST",
+        data: form_data,
+        dataType:'JSON',
+        contentType: false,
+        cache: false,
+        processData: false,
+    
+        success:function(data) {
+          link_file = data
+          
+        }
+      });
+      var result = link_file.substring(14);
+      var full_link= APP_URL+'/public/storage/file_pdf_temp/'+result;
+      var array = [];
+  
+  
+        var indexe_file = {}
+  
+       
+  
+  
+          $.each(all_index, function (){
+            var  name = this.name_index
+            if(this.file_id==id_file){
+  
+              var data1 = { [name] : this.attribut_id };
+              indexe_file =  Object.assign(indexe_file,data1);
+  
+            }
+        
+          
+          })
+  
+          var data = {'link_of_pdf' : full_link };
+  
+   
+          indexe_file =  Object.assign(indexe_file,data);
+  
+  
+          
+         
+         var array_response = {}
+  
+         
+     
+  
+        $.ajax({
+          'async': false,
+          url: 'http://192.168.2.51:5000/api_pdf',
+          contentType: "application/json",
+          data: JSON.stringify(indexe_file),
+         
+          type: 'POST',
+      
+          success: function(response){
+  
+           
+                
+                  array_response = response.reduce(function(result, current) {
+                        return Object.assign(result, current);
+                      }, {});
+  
+                  for (let x in indexe_file) {
+                    index_pdf  = x;
+                    for (let i in array_response) {
+                        if(index_pdf == i ){
+                          $("#field_"+indexe_file[x]).val(array_response[i]);
+                        }
+                    }
+                  }
+  
+                  $("#file_"+id_file).val(array_response['contenu']);
+                  
+               
+                  
+              },
+              error: function(error){
+                  console.log(error);
+          },
+        
+         });
+  
+  
+         $.ajax({
+          'async': false,
+          url: APP_URL+'/remove_temp_file', // router
+          method:"POST",
+          data: {link_file : result },
+          dataType: "json",
+      
+          success:function(data) {
+          
+            
+          }
+        });
+  
+  
+        
+  
+  
+  }
+  
 
 
 function remove_file(event, id_file) {
@@ -354,17 +463,17 @@ function add_row_select(row) {
                         row_select1 += ' <label for="colFormLabelSm" class=" text-uppercase col-sm-6 col-form-label col-form-label-sm">' + this.nom_champs + ' :</label>';
                         row_select1 += '<input type="text" name="nom_champ_file[]" value="' + this.nom_champs + ' " class="d-none"> ';
                         row_select1 += '<div class="col-sm-6">';
-                        row_select1 += ' <input  class="form-control controle_file" type="file" name="file[]" placeholder="Choose file" id="file" onchange="load_name_File(event,' + this.id + ');"> ';
+                        row_select1 += ' <input  class="form-control controle_file" type="file" name="file[]" placeholder="Choose file" id="file" onchange="loadFile(event,' + this.id + ');"> ';
 
                         row_select1 += '<input type="d-none" class="d-none" id="file_'+this.id+'" name="file_text[]" value="" >';
-                        row_select1 += '<input id="Objet_file'+this.id+'" type="text" class="form-control"  name="text_objet[]" value="" >';
-                        row_select1 += '<input id="date_file'+this.id+'"  type="date" class="form-control"  name="date_file[]" value="" >';
+                       
+                        row_select1 += '';
                         row_select1 += '</div></div>';
                         row_select1 += '</div>';
 
                         $("#attribut_file").append(row_select1);
                         $("#attribut_file").addClass("attribut_file");
-                        document.getElementById("date_file"+this.id).valueAsDate = new Date();
+                      
 
                     }
 

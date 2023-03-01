@@ -136,7 +136,7 @@
                             @if ($field_inventaire->type_champs == 'Text')
                                <input type="text" class="form-control" name="champs[]" required>  
                             @endif
-                            @if ($field_inventaire->type_champs == 'Date')
+                            @if ($field_inventaire->type_champs == 'date')
                                <input type="date" class="form-control" name="champs[]" required> 
                             @endif
                             
