@@ -271,7 +271,23 @@ Route::post('/choix_inventaires', [App\Http\Controllers\InventaireController::cl
 
 /*****  salle *****/
 
-Route::get('/salle', [App\Http\Controllers\SalleController::class, 'index'])->name('salle');;
+Route::get('/salle', [App\Http\Controllers\SalleController::class, 'index'])->name('salle');
+
+Route::post('/fill_rayonnage', [App\Http\Controllers\SalleController::class, 'fill_rayonnage']);
+
+
 Route::get('/api_site', [App\Http\Controllers\SalleController::class, 'all_Site']);
 Route::post('/salle_store', [App\Http\Controllers\SalleController::class, 'store']);
 Route::post('/delete_salle', [App\Http\Controllers\SalleController::class, 'delete']);
+
+
+/*****  Rayonnage  *****/
+
+Route::get('/rayonnage/{id}', [App\Http\Controllers\RayonnageController::class, 'index'])->name('rayonnage');;
+Route::get('/api_rayonnage/{id}', [App\Http\Controllers\RayonnageController::class, 'all_rayonnage']);
+Route::post('/rayonnage_store', [App\Http\Controllers\RayonnageController::class, 'store']);
+Route::post('/delete_rayonnage', [App\Http\Controllers\RayonnageController::class, 'delete']);
+
+Route::post('/calcul_topo', [App\Http\Controllers\RayonnageController::class, 'calcul_topo']);
+
+Route::post('/fill_code_topo', [App\Http\Controllers\SalleController::class, 'fill_code_topo']);

@@ -8,7 +8,7 @@ function remove_organigramme(e,row) {
                 if(confirm('Êtes-vous sûr?')) {
   
                   $.ajax({
-                    url:APP_URL+"/delete_salle",
+                    url:APP_URL+"/delete_rayonnage",
                     method:"POST",
                     data:{
                       items_delete : row
@@ -61,18 +61,55 @@ function click_edit(e,row) {
 }
 
 
-function voir_rayonnage(e,row) {
+function cote_topo(e,row) {
              
-    e.preventDefault();
-    var id =row
 
-    location.href=APP_URL+'/rayonnage/' + row ;
+
+
+
+
+$.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+  }
+});
+
+$.ajax({
+  url: APP_URL+"/calcul_topo",
+  method:"POST",
+  data:{
+    id_rayonnage : row,
+  },
+
+
+  success: function(data) {
+
+   
+
+    if (data == null){
+      cote_topo(e,row)
+      alert()
+    }
+
+    $("#select_cote_topographique").empty(); 
+
+    $.each(data, function (){
+      $("#select_cote_topographique").append($("<option     />").val(this.cote_topographique).text(this.cote_topographique));
+    });
+   
+
+
+  }
+})
 
 
 
 
 
 }
+
+
+
 
 
 function view_organigramme(e,row) {
@@ -101,7 +138,7 @@ function view_organigramme(e,row) {
       });
 
     $.ajax({
-        'url': APP_URL+"/api_site",
+        'url': APP_URL+"/api_rayonnage/"+id_salle,
         'method': "GET",
         'contentType': 'application/json'
     }).done( function(data) {
@@ -128,13 +165,15 @@ function view_organigramme(e,row) {
             },
     
             "columns": [
-                { "data": "id"  },
-                { "data": "numero_salle"  },
-                { "data": "site"  },
-                { "data": "ville"  },
+                { "data": "n_r"  },
+                { "data": "n_traves"  },
+                { "data": "n_niveau"  },
+                { "data": "n_conteneur"  },
+                { "data": "n_boite"  },
+          
                 { "data": "id"  , render: function(data, type, row) {
                   btn_print = ''
-                  btn_print += '<button type="button" class="btn btn-primary"   onclick="voir_rayonnage(event,' + data + ' )" >Voir</button>'
+                  btn_print += '<button type="button" class="btn btn-primary" aria-label="Close" data-toggle="modal" data-target="#cote_topograhique" onclick="cote_topo(event,' + data + ' )"  >Voir</button>'
                 
                 return btn_print } 
                 },

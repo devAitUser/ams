@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Attributs_dossier;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\Salle;
 use Carbon\Carbon;
 use Illuminate\Routing\UrlGenerator;
 use Smalot\PdfParser\Parser;
@@ -304,6 +305,8 @@ class DossierController extends Controller
 
     public function fill_sous_dossier1(Request $request)
     {
+        $salle = Salle::all();
+
         $dossier_champs = Dossier_champ::where([
             "parent_id" => $request->id_dossier,
         ])->get();
@@ -319,6 +322,7 @@ class DossierController extends Controller
         ])->get();
 
         return Response()->json([
+            "salle" => $salle,
             "all_index" => $all_index,
             "dossier_champs" => $dossier_champs,
             "attribut_champ" => $attribut_champ,

@@ -1,17 +1,11 @@
 @extends('layouts.app')
 @section('content')
-
 <script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
 
 	<link rel="stylesheet" href="https://cdn.materialdesignicons.com/5.0.45/css/materialdesignicons.min.css">
 
 
-<style>
-  .panel_pop_up {
-      display: block;
-    
-  }
-</style>
+
 
     <link href="{{ asset('assets/css/bootstrap2.min.css') }}" rel="stylesheet" >
 
@@ -40,34 +34,35 @@
    #organigramme_table_wrapper {
     margin-bottom: 15px;
    }
-   .panel-heading {
+
+  
+    .panel-heading {
     width: 80% !important;
-   }
-   table.table-bordered.dataTable tbody th, table.table-bordered.dataTable tbody td {
-    
-        text-transform: uppercase;
-    }
+     }
+     .table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th {
+            border: 1px solid #ddd;
+            vertical-align: unset !important;
+        }
 </style>
 
 
 
-    
-      <div class="panel-heading">  Les Salles </div>
+      <div class="panel-heading">   
+        Les utilisateurs
+     </div>
       <div class="panel_view_details">
          <div class="table_p">
 
             <div class="block_manager_datable">
-                <a href="#" class="create_organi" aria-label="Close" data-toggle="modal" data-target="#exampleModal">creer un nouveau </a>
+                <a  href="#" class="create_organi" aria-label="Close" aria-label="Close" data-toggle="modal" data-target="#model_create" >Nouveau  </a>
             </div>
 
             <table id="organigramme_table" class=" table table-bordered text-center styled-table">
                <thead>
                    <tr>
-                       <th scope="col">Num</th>
-                       <th scope="col">Numero salle</th>
-                       <th scope="col">Site</th>
-                       <th scope="col">Ville</th>
-                       <th scope="col">Rayonnage</th>
+                       <th scope="col">Numero</th>
+                       <th scope="col">Nom</th>
+                      
                        <th scope="col">Action  </th>
 
 
@@ -103,23 +98,19 @@
 
          </div>
 
+         
+
 
       </div>
-
-
-
-
-
-
-
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      
+       <!-- Modal -->
+  <div class="modal fade" id="model_create" tabindex="-1" role="dialog" aria-labelledby="model_create" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <form  method="post" action="{{url('salle_store')}}">
+        <form  method="post" action="{{url('create_inventaire_table')}}">
             @csrf
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Créer un nouvelle salle</h5>
+          <h5 class="modal-title" id="exampleModalLabel">créer  </h5>
           <button type="button" class="close" data-dismiss="modal" >
 
           </button>
@@ -129,20 +120,9 @@
 
 
                     <div class="form-group">
-                      <label for="nom_organigramme"> Numero salle*  </label>
-                      <input type="text" class="form-control" name="num_salle"  id="nom_organigramme"  placeholder="Nom du plan de classement" required="">
-
-                    </div>
-
-                    <div class="form-group">
-                      <label for="nom_organigramme"> Site*  </label>
-                      <input type="text" class="form-control" name="site"  id="nom_organigramme"  placeholder="Nom du plan de classement" required="">
-
-                    </div>
-
-                    <div class="form-group">
-                      <label for="nom_organigramme"> Ville* </label>
-                      <input type="text" class="form-control" name="ville"  id="nom_organigramme"  placeholder="Nom du plan de classement" required="">
+                      <label for="nom_organigramme"> Ajouter   </label>
+                      <input type="text" value="{{$id}}" name="id_inventaire" hidden>
+                      <input type="text" class="form-control" name="nom_inventaire"  id="nom_inventaire"  placeholder="" required="">
 
                     </div>
 
@@ -162,24 +142,13 @@
   </div>
 
 
+  <script type="text/javascript">
+    var id = {!! json_encode($id) !!}
+    
+    
+    </script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   <script src="{{asset('assets/js/datatables.min.js')}}"></script>
-      <script src="{{asset('assets/js/salle.js')}}"></script>
+      <script src="{{asset('assets/js/datatables.min.js')}}"></script>
+      <script src="{{asset('assets/js/details_iventaire.js')}}"></script>
 
 @endsection

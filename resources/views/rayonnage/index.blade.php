@@ -49,10 +49,12 @@
     }
 </style>
 
-
-
+<script type="text/javascript">
+      var id_salle = {!! json_encode($id) !!}
+      
+      </script>
     
-      <div class="panel-heading">  Les Salles </div>
+      <div class="panel-heading">  Les rayonnages de la salle  </div>
       <div class="panel_view_details">
          <div class="table_p">
 
@@ -63,11 +65,14 @@
             <table id="organigramme_table" class=" table table-bordered text-center styled-table">
                <thead>
                    <tr>
-                       <th scope="col">Num</th>
-                       <th scope="col">Numero salle</th>
-                       <th scope="col">Site</th>
-                       <th scope="col">Ville</th>
-                       <th scope="col">Rayonnage</th>
+                      
+                       <th scope="col">Numero rayonnage</th>
+                       <th scope="col">Nombre traves</th>
+                       <th scope="col">Nombre niveau</th>
+                       <th scope="col">Nombre conteneur</th>
+                       <th scope="col">Nombre boite</th>
+
+                       <th scope="col">Cote topographique</th>
                        <th scope="col">Action  </th>
 
 
@@ -116,10 +121,77 @@
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <form  method="post" action="{{url('salle_store')}}">
+        <form  method="post" action="{{url('rayonnage_store')}}">
             @csrf
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Créer un nouvelle salle</h5>
+          <button type="button" class="close" data-dismiss="modal" >
+
+          </button>
+        </div>
+        <div class="modal-body">
+        <div class="panel_pop_up">
+
+
+        <div class="form-group">
+          <label for="nom_organigramme"> Numero de rayonnage*  </label>
+          <input type="text" class="form-control" name="num_rayonnage"  id="num_rayonnage"  placeholder="Nom du plan de classement" required="">
+
+        </div>
+
+        <div class="form-group">
+          <label for="nom_organigramme"> Nombre de travers* </label>
+          <input type="text" class="form-control" name="nbr_travers"  id="nbr_travers"  placeholder="Nom du plan de classement" required="">
+
+        </div>
+
+        <div class="form-group">
+          <label for="nom_organigramme"> Nombre de niveau* </label>
+          <input type="text" class="form-control" name="nbr_niveau"  id="nbr_niveau"  placeholder="Nom du plan de classement" required="">
+
+        </div>
+
+
+        <div class="form-group">
+          <label for="nom_organigramme"> Nombre de conteneur* </label>
+          <input type="text" class="form-control" name="nbr_conteneur"  id="nbr_conteneur"  placeholder="Nom du plan de classement" required="">
+
+        </div>
+        <div class="form-group">
+          <label for="nom_organigramme"> Nombre de boite* </label>
+          <input type="text" class="form-control" name="nbr_boite"  id="nbr_boite"  placeholder="Nom du plan de classement" required="">
+
+        </div>
+
+        <input type="text" value="{{$id}}" name='id_salle' hidden>
+
+
+
+
+
+
+
+        </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+          <button type="submit" class="btn btn-primary">Créer</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+   <!-- Modal COTE TOPOGRAHIQUE -->
+  <div class="modal fade" id="cote_topograhique" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <form  method="post" action="{{url('salle_store')}}">
+            @csrf
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Les cote topograhiques</h5>
           <button type="button" class="close" data-dismiss="modal" >
 
           </button>
@@ -129,22 +201,17 @@
 
 
                     <div class="form-group">
-                      <label for="nom_organigramme"> Numero salle*  </label>
-                      <input type="text" class="form-control" name="num_salle"  id="nom_organigramme"  placeholder="Nom du plan de classement" required="">
+                      <label for="nom_organigramme"> Les cote topograhiques  </label>
+                   
+                      <select name="" id="select_cote_topographique" class="form-control" >
 
+                      </select>
                     </div>
 
-                    <div class="form-group">
-                      <label for="nom_organigramme"> Site*  </label>
-                      <input type="text" class="form-control" name="site"  id="nom_organigramme"  placeholder="Nom du plan de classement" required="">
+                
 
-                    </div>
+               
 
-                    <div class="form-group">
-                      <label for="nom_organigramme"> Ville* </label>
-                      <input type="text" class="form-control" name="ville"  id="nom_organigramme"  placeholder="Nom du plan de classement" required="">
-
-                    </div>
 
 
 
@@ -154,7 +221,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-          <button type="submit" class="btn btn-primary">Créer</button>
+
         </div>
         </form>
       </div>
@@ -178,8 +245,7 @@
 
 
 
-
    <script src="{{asset('assets/js/datatables.min.js')}}"></script>
-      <script src="{{asset('assets/js/salle.js')}}"></script>
+      <script src="{{asset('assets/js/rayonnage.js')}}"></script>
 
 @endsection

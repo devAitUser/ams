@@ -94,8 +94,7 @@ $(document).ready(function() {
             width: "100%"
            });
            
-           $('#select_tree_up_'+id_select).html(data);
-           count++;
+           
 
 
          
