@@ -266,6 +266,7 @@ Route::post('/store_inventaire_table', [App\Http\Controllers\InventaireControlle
 
 Route::post('/delete_value_field', [App\Http\Controllers\InventaireController::class, 'delete_value_field']);
 
+Route::post('/delete_value_field_inventaire', [App\Http\Controllers\InventaireController::class, 'delete_value_field_inventaire']);
 
 Route::post('/choix_inventaires', [App\Http\Controllers\InventaireController::class, 'choix_inventaires'])->name('choix_inventaires');
 

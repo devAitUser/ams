@@ -4,10 +4,48 @@ var check_parent = 'false';
  
  var type_btn = 'btn_dossier';
 
+ function removeRow_table_champs_add_inventaire(e,row,id=null) {
+
+  e.preventDefault();
+
+  document.getElementById("row_table_champs_add_" + row).remove();
 
 
 
- function removeRow_table_champs_add(e,row,id=null) {
+
+    $.ajaxSetup({
+      headers: {
+          'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+      }
+     });
+
+    $.ajax({
+      url: APP_URL+"/delete_value_field",
+      method:"POST",
+      data:{
+        items_delete : id
+      },
+      success:function(data){
+  
+        
+  
+    
+    
+  
+      }
+     })
+
+  
+
+
+
+
+
+
+}
+
+
+function removeRow_table_champs_add(e,row,id=null) {
 
   e.preventDefault();
 
@@ -23,7 +61,7 @@ var check_parent = 'false';
      });
 
     $.ajax({
-      url: APP_URL+"/delete_value_field",
+      url: APP_URL+"/delete_value_field_inventaire",
       method:"POST",
       data:{
         items_delete : row
@@ -55,6 +93,20 @@ function unset_table() {
         $('#add_table_champs_add tr:not(:nth-child(-n+1))').remove();
         $(".block_attributs").addClass("hidden");
 
+  }
+
+
+  function type_champs(id,chosen) {
+
+    if(chosen == "cote"){
+       $('#input'+id).val(" Cote topographique ")
+      
+    }else {
+      $('#input'+id).val("")
+      
+    }
+   
+    
   }
 
 
@@ -98,16 +150,16 @@ $(document).ready(function() {
       
 
 
-            add_row += '<td><input name="new_name_champ[]" class="form-control" type="text"   required></td>';
+            add_row += '<td><input id="input' + count + '" name="new_name_champ[]" class="form-control" type="text"   required></td>';
 
       
           
 
-            add_row += '<td>  <select name ="new_type_champ[]" class="form-control" id="" required> ';
-            add_row += '  <option>sélectionner le type</option><option value="date">Date</option> <option value="Text">Text</option> ';
+            add_row += '<td>  <select onChange="type_champs(' + count + ' ,this.options[this.selectedIndex].value)" name ="new_type_champ[]" class="form-control" id="" required> ';
+            add_row += '  <option>sélectionner le type</option><option value="date">Date</option> <option value="Text">Text</option> <option value="cote"> Cote topographique </option>';
             add_row += '   </select></td>';
             add_row += '<td>  <div class="block_action_organigramme"> ';
-            add_row += '<a href="" onClick="removeRow_table_champs_add(event,' + count + ')" ><i class="fa-solid fa-circle-xmark "></i></a>';
+            add_row += '<a href="" onClick="removeRow_table_champs_add_inventaire(event,' + count + ')" ><i class="fa-solid fa-circle-xmark "></i></a>';
             add_row += '      </div> </td></tr>';
           
                 

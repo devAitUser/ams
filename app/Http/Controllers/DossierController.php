@@ -20,6 +20,9 @@ use App\Models\Request_delete_dossier;
 
 use App\Models\Entite;
 
+
+use App\Models\Table_topographique;
+
 use App\Models\Indexe;
 use Session;
 
@@ -353,6 +356,7 @@ class DossierController extends Controller
 
         for ($i = 0; $i < count($request->input("value_select")); $i++) {
             $attributs_dossier = new Attributs_dossier();
+            
             $dossier_ = Dossier_champ::find($request->value_select[$i]);
             $attributs_dossier->nom_champs = $request->nom_champs_select[$i];
             $attributs_dossier->valeur = $dossier_->nom_champs;
@@ -366,8 +370,16 @@ class DossierController extends Controller
             for ($i = 0; $i < count($request->input("nom_champ")); $i++) {
                 if ($request->valeur[$i] != null) {
                     $attributs_dossier = new Attributs_dossier();
-                    $attributs_dossier->nom_champs = $request->input("nom_champ")[$i];
-                    $attributs_dossier->valeur = $request->valeur[$i];
+                    if($request->nom_champ[$i] == "Code topograhique"){
+                      $table_topographiques=  Table_topographique::find($request->valeur[$i]);
+                      $table_topographiques->status = 1;
+                      $attributs_dossier->valeur = $table_topographiques->cote_topographique;
+                      $table_topographiques->save();
+                    }else {
+                        $attributs_dossier->valeur = $request->valeur[$i];
+                    }
+                    $attributs_dossier->nom_champs = $request->nom_champ[$i];
+                    
                     $attributs_dossier->type_champs = $request->type_champ[$i];
                     $attributs_dossier->dossier_id = $dossier->id;
                     $attributs_dossier->champs_id = $request->id_champs[$i];
@@ -376,7 +388,7 @@ class DossierController extends Controller
             }
         }
 
-      
+        if ($request->input("nom_champ_file") != null) {
             for ($i = 0; $i < count($request->nom_champ_file); $i++) {
                 if ($request->nom_champ_file[$i] != null) {
                     $attributs_dossier1 = new Attributs_dossier();
@@ -398,6 +410,8 @@ class DossierController extends Controller
                     }
                 }
             }
+
+        }
     
         Session::flash('show_dossier','content');
 

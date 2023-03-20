@@ -191,6 +191,15 @@ class InventaireController extends Controller
 
     }
     public function delete_value_field(Request $request){
+      
+        $Field_table_inventaire_delete = Field_inventaire::find($request->items_delete);
+        $Field_table_inventaire_delete->delete();
+   
+       
+
+    }
+    public function delete_value_field_inventaire(Request $request){
+      
         $delete_field = Value_field::where(["id_field_inventaire" => $request->items_delete ])->get();
         $Field_table_inventaire_delete = Field_table_inventaire::find($request->items_delete);
         $Field_table_inventaire_delete->delete();

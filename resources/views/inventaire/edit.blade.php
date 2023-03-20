@@ -106,12 +106,13 @@
                         <option>sélectionner le type</option>
                         <option value="Date"  <?php if($field_inventaire[$i]->type_champs == "Date"){ echo 'selected';}?> >Date</option>
                          <option value="Text" <?php if($field_inventaire[$i]->type_champs == "Text"){ echo 'selected';}?>>Text</option>    
+                         <option value="Text" <?php if($field_inventaire[$i]->type_champs == "cote"){ echo 'selected';}?>> Cote topographique </option>   
                         </select>
                       </td>
                         
                         <td>  
                           <div class="block_action_organigramme"> 
-                            <a href="" onclick="removeRow_table_champs_add(event,<?php echo $i ?>,{{$field_inventaire[$i]->id}})">
+                            <a href="" onclick="removeRow_table_champs_add_inventaire(event,<?php echo $i ?>,{{$field_inventaire[$i]->id}})">
                               <i class="fa-solid fa-circle-xmark "></i>
                             </a>      
                           </div> 
