@@ -310,13 +310,9 @@ class DossierController extends Controller
     {
         $salle = Salle::all();
 
-        $dossier_champs = Dossier_champ::where([
-            "parent_id" => $request->id_dossier,
-        ])->get();
+        $dossier_champs = Dossier_champ::where([ "parent_id" => $request->id_dossier])->get();
 
-        $attribut_champ = Attribut_champ::where([
-            "dossier_champs_id" => $request->id_dossier,
-        ])->get();
+        $attribut_champ = Attribut_champ::where([ "dossier_champs_id" => $request->id_dossier ])->get();
 
         $dossier_champs_label = Dossier_champ::find($request->id_dossier);
 

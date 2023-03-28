@@ -48,6 +48,11 @@ var check_parent = 'false';
           add_row += 'selected';
         }
         add_row += '>fichier</option>';
+        add_row += ' <option value="cote"';
+        if(data.attributs[i].type_champs == 'cote'){
+          add_row += 'selected';
+        }
+        add_row += '>Cote topographique</option>';
         add_row += '   </select></td>';
         add_row += '<td>  <div class="block_action_organigramme"> ';
         add_row += '<a href="" onClick="model_removeRow_table_champs_add(event,' + [i] + ','+data.attributs[i].id+')" ><i class="fa-solid fa-circle-xmark "></i></a>';
@@ -633,7 +638,7 @@ $(document).ready(function() {
           
 
             add_row += '<td>  <select name ="type_champ[]" class="form-control" id="" required> ';
-            add_row += '  <option>sélectionner le type</option><option value="date">Date</option> <option value="Text">Text</option> <option value="Fichier">fichier</option>';
+            add_row += '  <option>sélectionner le type</option><option value="date">Date</option> <option value="Text">Text</option> <option value="Fichier">fichier</option><option value="cote">Cote topographique</option>';
             add_row += '   </select></td>';
             add_row += '<td>  <div class="block_action_organigramme"> ';
             add_row += '<a href="" onClick="removeRow_table_champs_add(event,' + count + ')" ><i class="fa-solid fa-circle-xmark "></i></a>';
@@ -778,7 +783,7 @@ $(document).ready(function() {
           
 
             add_row += '<td>  <select name ="new_type_champ[]" class="form-control" id="" required> ';
-            add_row += '  <option>sélectionner le type</option><option value="date">Date</option> <option value="Text">Text</option> <option value="Fichier">fichier</option>';
+            add_row += '  <option>sélectionner le type</option><option value="date">Date</option> <option value="Text">Text</option> <option value="Fichier">fichier</option><option value="cote">Cote topographique</option>';
             add_row += '   </select></td>';
             add_row += '<td>  <div class="block_action_organigramme"> ';
             add_row += '<a href="" onClick="model_removeRow_table_champs_add(event,' + rowCount + ')" ><i class="fa-solid fa-circle-xmark "></i></a>';

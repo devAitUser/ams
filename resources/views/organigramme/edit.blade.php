@@ -208,6 +208,7 @@
                               <option value="date">Date</option> 
                               <option value="Text">Text</option> 
                               <option value="Fichier">fichier</option>
+                              <option value="cote">Cote topographique</option>
                            </select>
                         </td>
                         <td>

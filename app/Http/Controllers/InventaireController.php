@@ -6,12 +6,13 @@ use App\Models\Inventaire;
 use Illuminate\Http\Request;
 use App\Models\Field_inventaire;
 
+use App\Models\Salle;
 use App\Models\Inventaire_table;
 use App\Models\Field_table_inventaire;
 use App\Models\Value_field;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-
+use App\Models\Organigramme;
 
 class InventaireController extends Controller
 {
@@ -128,12 +129,18 @@ class InventaireController extends Controller
     }
     public function create_inventaire(){
 
+
+        $salle = Salle::all();
+
         $array_table_inventaires = array();
         $array_field_value =array();
 
         $user = Auth::user();
 
         $field_inventaire = Field_inventaire::where(["id_inventaire_tables" => $user->id_choix_inventaire ])->get();
+
+        $name = inventaire_table::find($user->id_choix_inventaire);
+        $name =  $name->nom;
 
 
         $Field_table_inventaire = Field_table_inventaire::where(["inventaire_id" => $user->id_choix_inventaire ])->get();
@@ -152,7 +159,7 @@ class InventaireController extends Controller
 
             }
 
-        $data = array( 'field_inventaires' => $field_inventaire , 'id_inventaires' => $user->id_choix_inventaire , 'array_table_inventaires' => $array_table_inventaires );
+        $data = array( 'field_inventaires' => $field_inventaire , 'id_inventaires' => $user->id_choix_inventaire , 'array_table_inventaires' => $array_table_inventaires , 'salles' => $salle , 'name' => $name );
         
         return view('inventaire.create_inventaire',$data);
        
@@ -163,7 +170,10 @@ class InventaireController extends Controller
 
         $table_inventaires = Inventaire_table::where(["id_organigrammes" => $user->id_inventaire ])->get();
 
-        $data = array( 'inventaires' => $table_inventaires );
+        $name_inventaire   =  Organigramme::find($user->id_inventaire);
+        $name_inventaire   =   $name_inventaire->nom;
+
+        $data = array( 'inventaires' => $table_inventaires, 'name_inventaire' => $name_inventaire );
 
         return view('inventaire.inventaire_choix',$data);
     }
@@ -234,6 +244,12 @@ class InventaireController extends Controller
         $upd->save();
 
         return redirect(route("create__inventaire"));
+
+    }
+
+    public function gestion_physique(Request $request){
+
+          return view("gestion_physique", );
 
     }
 }

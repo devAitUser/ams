@@ -79,7 +79,7 @@
 
 
       <div class="panel-heading">   
-        inventaire
+        Inventaire de {{$name_inventaire}}
      </div>
       <div class="panel_view_details">
          <div class="table_p">
@@ -123,7 +123,7 @@
            
                
                   
-                  <button type="submit" class="btn btn-info  ">Validé</button>
+                  <button type="submit" class="btn btn-info  ">Valider</button>
              
                </div>
               </form>

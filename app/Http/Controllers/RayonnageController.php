@@ -75,6 +75,7 @@ class RayonnageController extends Controller
     
                                 $new->id_rayonnages      =  $request->id_rayonnage;
                                 $new->cote_topographique =  $cal_r->n_r." " . $a . "." . $b . "." . $c . "." . $d ;
+                                $new->status =  0;
                                 $array_cote['cote_topographique'] =  $cal_r->n_r." " . $a . "." . $b . "." . $c . "." . $d ;
                                 $new->save() ;
                         }

@@ -2,15 +2,18 @@ var count = 2;
 var all_index = [];
 
 
+
+
+
 function load_name_File(event, id_file) {
 
 
-    let file = event.target.files[0].name
-
-    const Array_file = file.split(".");
-    let x = Array_file[0];
-
-    $('#Objet_file'+id_file).val(file);
+    var output = document.getElementById('output');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output.onload = function() {
+      URL.revokeObjectURL(output.src+'#toolbar=1') // free memory
+      console.log(output.src+'#toolbar=0&navpanes=0&scrollbar=0')
+    }
 
 }
 
@@ -217,7 +220,7 @@ function loadFile(event, id_file) {
 
     $.ajax({
         'async': false,
-        url: 'http://192.168.2.51:5000/api_pdf',
+        url: 'http://192.168.0.81:5000/api_pdf',
         contentType: "application/json",
         data: JSON.stringify(indexe_file),
 
@@ -438,102 +441,89 @@ function add_row_select(row) {
 
                     }
 
+                    if (this.type_champs == "cote") {
+
+                        row_select1 = '<div id="" class="col-md-12">';
+                        row_select1 += '<div class="form-group row">';
+                        row_select1 += " <label for='colFormLabelSm' class=' text-uppercase col-sm-6 col-form-label col-form-label-sm'>Salle :</label>";
+                        row_select1 += "<input type='text' name='nom_champ[]'  value='Salle' class='d-none'> ";
+                        row_select1 += '<input type="text" name="valeur[]"   id="salle_id"  value="" class="d-none"> ';
+                        row_select1 += '<input type="text" name="type_champ[]" value="text" class="d-none" required> <div class="col-sm-6">';
+        
+                        row_select1 += '<select  id="id_salle" class="form-select" onchange="select_rayonnage()" >';
+                        row_select1 += '<option value="">selectionner</option>';
+                        $.each(data.salle, function() {
+                            row_select1 += '<option value="' + this.id + '">' + this.site + " / " + this.numero_salle + '</option>';
+                        });
+             
+                        row_select1 += ' </select>';
+                    
+        
+                        row_select1 += '</div></div>';
+                        row_select1 += '</div>';
+        
+           
+        
+                        $("#attribut_champ").append(row_select1);
+        
+        
+                        row_select1 = '<div id="" class="col-md-12">';
+                        row_select1 += '<div class="form-group row">';
+                        row_select1 += " <label for='colFormLabelSm' class=' text-uppercase col-sm-6 col-form-label col-form-label-sm'>Rayonnage :</label>";
+                        row_select1 += "<input type='text' name='nom_champ[]'  value='Rayonnage' class='d-none'> ";
+                        row_select1 += '<input type="text" name="valeur[]"   id="Rayonnage_id"  value="" class="d-none"> ';
+                        row_select1 += '<input type="text" name="type_champ[]" value="text" class="d-none" required> <div class="col-sm-6">';
+        
+                        row_select1 += '<select  id="select_rayonnage_1" class="form-select" onchange="select_type_rayonnage()" >';
+        
+                        row_select1 += '<option value="">selectionner</option>';
+                        row_select1 += ' </select>';
+                    
+        
+                        row_select1 += '</div></div>';
+                        row_select1 += '</div>';
+        
+           
+        
+                        $("#attribut_champ").append(row_select1);
+        
+        
+                        row_select1 = '<div id="" class="col-md-12">';
+                        row_select1 += '<div class="form-group row">';
+                        row_select1 += " <label for='colFormLabelSm' class=' text-uppercase col-sm-6 col-form-label col-form-label-sm'>Code topograhique :</label>";
+                        row_select1 += "<input type='text' name='nom_champ[]'  value='Code topograhique' class='d-none'> ";
+                       
+                        row_select1 += '<input type="text" name="type_champ[]" value="text" class="d-none" required> <div class="col-sm-6">';
+        
+                        row_select1 += '<select name="valeur[]" id="select_code_topo" class="form-select" onchange="" >';
+        
+                        
+             
+                        row_select1 += ' </select>';
+                    
+        
+                        row_select1 += '</div></div>';
+                        row_select1 += '</div>';
+        
+           
+        
+                        $("#attribut_champ").append(row_select1);
+                        
+                   
+
+                    }
+
 
 
 
                 });
 
 
-                var vesrion= " dispose d&#039;une version physique";
+           
 
-                row_select1 = '<div id="" class="col-md-12">';
-                row_select1 += '<div class="form-group row">';
-                row_select1 += " <label for='colFormLabelSm' class=' text-uppercase col-sm-6 col-form-label col-form-label-sm'>dispose d'une version physique :</label>";
-                row_select1 += "<input type='text' name='nom_champ[]'  value='"+vesrion+"' class='d-none'> ";
-                row_select1 += '<input type="text" name="id_champs[]"  value="" class="d-none"> ';
-                row_select1 += '<input type="text" name="type_champ[]" value="text" class="d-none" required> <div class="col-sm-6">';
+        
 
-            
-                row_select1 += '<div class="form-check form-switch">';
-                row_select1 += ' <input class="form-check-input"  type="checkbox" id="version_physique_btn" onclick="fonction_checkbox()" >';
-                row_select1 += '<input type="text" id="VERSION_PHYSIQUE" class="d-none" name="valeur[]" value="NON" >';
-                row_select1 += '</div>';
-
-                row_select1 += '</div></div>';
-                row_select1 += '</div>';
-
-                $("#attribut_champ").append(row_select1);
-
-
-                var vesrion= "la salle";
-
-                console.log('console log'+data.salle);
-
-                row_select1 = '<div id="" class="col-md-12">';
-                row_select1 += '<div class="form-group row">';
-                row_select1 += " <label for='colFormLabelSm' class=' text-uppercase col-sm-6 col-form-label col-form-label-sm'>Salle :</label>";
-                row_select1 += "<input type='text' name='nom_champ[]'  value='Salle' class='d-none'> ";
-                row_select1 += '<input type="text" name="valeur[]"   id="salle_id"  value="" class="d-none"> ';
-                row_select1 += '<input type="text" name="type_champ[]" value="text" class="d-none" required> <div class="col-sm-6">';
-
-                row_select1 += '<select  id="id_salle" class="form-select" onchange="select_rayonnage()" >';
-                row_select1 += '<option value="">selectionner</option>';
-                $.each(data.salle, function() {
-                    row_select1 += '<option value="' + this.id + '">' + this.site + " / " + this.numero_salle + '</option>';
-                });
-     
-                row_select1 += ' </select>';
-            
-
-                row_select1 += '</div></div>';
-                row_select1 += '</div>';
-
-   
-
-                $("#attribut_champ").append(row_select1);
-
-
-                row_select1 = '<div id="" class="col-md-12">';
-                row_select1 += '<div class="form-group row">';
-                row_select1 += " <label for='colFormLabelSm' class=' text-uppercase col-sm-6 col-form-label col-form-label-sm'>Rayonnage :</label>";
-                row_select1 += "<input type='text' name='nom_champ[]'  value='Rayonnage' class='d-none'> ";
-                row_select1 += '<input type="text" name="valeur[]"   id="Rayonnage_id"  value="" class="d-none"> ';
-                row_select1 += '<input type="text" name="type_champ[]" value="text" class="d-none" required> <div class="col-sm-6">';
-
-                row_select1 += '<select  id="select_rayonnage_1" class="form-select" onchange="select_type_rayonnage()" >';
-
-                row_select1 += '<option value="">selectionner</option>';
-                row_select1 += ' </select>';
-            
-
-                row_select1 += '</div></div>';
-                row_select1 += '</div>';
-
-   
-
-                $("#attribut_champ").append(row_select1);
-
-
-                row_select1 = '<div id="" class="col-md-12">';
-                row_select1 += '<div class="form-group row">';
-                row_select1 += " <label for='colFormLabelSm' class=' text-uppercase col-sm-6 col-form-label col-form-label-sm'>Code topograhique :</label>";
-                row_select1 += "<input type='text' name='nom_champ[]'  value='Code topograhique' class='d-none'> ";
                
-                row_select1 += '<input type="text" name="type_champ[]" value="text" class="d-none" required> <div class="col-sm-6">';
-
-                row_select1 += '<select name="valeur[]" id="select_code_topo" class="form-select" onchange="" >';
-
-                
-     
-                row_select1 += ' </select>';
-            
-
-                row_select1 += '</div></div>';
-                row_select1 += '</div>';
-
-   
-
-                $("#attribut_champ").append(row_select1);
 
 
                     for (let index = 0; index < coordonnees.length; index++) {

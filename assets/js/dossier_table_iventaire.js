@@ -30,7 +30,10 @@ $(document).ready(function() {
   
   var t = $('#table').DataTable( {
         dom: 'Bfrtip',
-        searching: false,
+        searching: true,
+        "oLanguage": {
+          "sUrl": APP_URL+"/assets/fr-FR.json"
+        },
         buttons: [
         
           {

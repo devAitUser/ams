@@ -57,6 +57,8 @@ class SalleController extends Controller
     public function fill_code_topo(Request $request){
 
         $code_topo = Table_topographique::where("id_rayonnages",  $request->id_rayonnage )->get();
+
+        
     
         return  Response()
         ->json($code_topo);

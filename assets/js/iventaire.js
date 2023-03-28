@@ -45,6 +45,75 @@ var check_parent = 'false';
 }
 
 
+function select_rayonnage(){
+  
+  var id_salle = $("#id_salle").val()
+
+  var text_salle =   $("#id_salle option:selected").text();
+
+  $("#salle_id").val(text_salle)
+
+  $("#select_rayonnage_1").find('option').not(':first').remove();
+  $("#select_code_topo").find('option').not(':first').remove();
+
+  $.ajaxSetup({
+      headers: {
+          'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+      }
+  });
+  $.ajax({ 
+      url: APP_URL + "/fill_rayonnage",
+      method: "post",
+      data: {
+          id_salle: id_salle ,
+        
+      },
+      success: function(data) {
+          $.each(data, function() {
+
+              $("#select_rayonnage_1").append($("<option     />").val(this.id).text(this.n_r));
+          });
+
+
+      }
+  })
+}
+
+
+function select_type_rayonnage(){
+  
+  var id_rayonnage = $("#select_rayonnage_1").val()
+
+  var text_rayonnage =   $("#select_rayonnage_1 option:selected").text();
+
+  $("#Rayonnage_id").val(text_rayonnage)
+
+  $("#select_code_topo").find('option').not(':first').remove();
+
+  $.ajaxSetup({
+      headers: {
+          'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+      }
+  });
+  $.ajax({ 
+      url: APP_URL + "/fill_code_topo",
+      method: "post",
+      data: {
+          id_rayonnage: id_rayonnage ,
+        
+      },
+      success: function(data) {
+          $.each(data, function() {
+
+              $("#select_code_topo").append($("<option     />").val(this.cote_topographique).text(this.cote_topographique));
+          });
+
+
+      }
+  })
+}
+
+
 function removeRow_table_champs_add(e,row,id=null) {
 
   e.preventDefault();

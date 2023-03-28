@@ -106,7 +106,7 @@
                         <option>sélectionner le type</option>
                         <option value="Date"  <?php if($field_inventaire[$i]->type_champs == "Date"){ echo 'selected';}?> >Date</option>
                          <option value="Text" <?php if($field_inventaire[$i]->type_champs == "Text"){ echo 'selected';}?>>Text</option>    
-                         <option value="Text" <?php if($field_inventaire[$i]->type_champs == "cote"){ echo 'selected';}?>> Cote topographique </option>   
+                         <option value="cote" <?php if($field_inventaire[$i]->type_champs == "cote"){ echo 'selected';}?>> Cote topographique </option>   
                         </select>
                       </td>
                         

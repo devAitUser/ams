@@ -71,6 +71,10 @@
             border: 1px solid #ddd;
             vertical-align: unset !important;
         }
+
+        .block_select {
+         display: flex;
+      }
 </style>
 
 
@@ -84,7 +88,7 @@
           <div class="card border mb-3">
             <div class="row">
                <div class="col-md-10 pr-0">
-                  <div class="card-header">l'inventaire de ANP</div>
+                  <div class="card-header">Nom de l'inventaire : {{$name}}</div>
                </div>
                <div class="col-md-2 pl-0">
                   <div class="card-header"><a id="btn_F" data-toggle="collapse" href="#collapse_Formation" role="button" aria-expanded="true" aria-controls="collapse_Formation" class="btn btn-success btn-ajouter">ajouter</a></div>
@@ -136,8 +140,31 @@
                             @if ($field_inventaire->type_champs == 'Text')
                                <input type="text" class="form-control" name="champs[]" required>  
                             @endif
-                            @if ($field_inventaire->type_champs == 'date')
+                            @if ($field_inventaire->type_champs == 'Date')
                                <input type="date" class="form-control" name="champs[]" required> 
+                            @endif
+                            @if ($field_inventaire->type_champs == 'cote')
+                            <div class="block_select">
+
+
+                              <select id="id_salle" class="form-select" onchange="select_rayonnage()">
+                                 <option value="">selectionner</option>
+                                 @foreach($salles as $salle)
+                                 <option value="{{$salle->id}}">{{$salle->site}} / {{$salle->numero_salle}} </option>
+                                 
+                                 @endforeach
+                              </select>
+                              <select  id="select_rayonnage_1" class="form-select" onchange="select_type_rayonnage()" >
+                                 <option value="">selectionner</option>
+                        
+                              </select>
+                              <select name="champs[]" id="select_code_topo" class="form-select" onchange="" >
+                        
+                              </select>
+
+
+                            </div>
+                            
                             @endif
                             
                           </td>

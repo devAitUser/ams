@@ -226,13 +226,13 @@ p.top_header {
                      </li>
 
 
-                     <li class="icon_menu   {{ request()->is('inventaire')  ? 'active' : '' }} ">
-                        <a href="{{route('inventaire')}}">
+                     <li class="icon_menu   {{ request()->is('gestion_physique')  ? 'active' : '' }} ">
+                        <a href="{{route('gestion_physique')}}">
                         <span class="material-icons">
                            inventory
                         </span>
                         </a>
-                        inventaire
+                        Gestion physique
                      </li>
    
                

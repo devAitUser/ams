@@ -292,3 +292,9 @@ Route::post('/delete_rayonnage', [App\Http\Controllers\RayonnageController::clas
 Route::post('/calcul_topo', [App\Http\Controllers\RayonnageController::class, 'calcul_topo']);
 
 Route::post('/fill_code_topo', [App\Http\Controllers\SalleController::class, 'fill_code_topo']);
+
+
+/** gestion physique */
+
+
+Route::get('/gestion_physique', [App\Http\Controllers\InventaireController::class, 'gestion_physique'])->name('gestion_physique');;
