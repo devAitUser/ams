@@ -124,7 +124,7 @@ class HomeController extends Controller
             
           
 
-        }
+             }
        
         $data = array( 'Count' => $Count , 'ckeck_select' => $ckeck_select , 'nom_projet' => $nom_projet , 'dossier_indexe' => $count_dossier_indexé );
 
