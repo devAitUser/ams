@@ -5,7 +5,7 @@ var all_index = [];
 
 
 
-function load_name_File(event, id_file) {
+function load_name_File1(event, id_file) {
 
 
     var output = document.getElementById('output');
@@ -150,9 +150,11 @@ function fonction_checkbox(){
   }
 
 
-function loadFile(event, id_file) {
+function load_name_File(event, id_file) {
     event.preventDefault();
 
+
+ 
 
 
     var output = document.getElementById('output');
@@ -204,7 +206,8 @@ function loadFile(event, id_file) {
     })
 
     var data = {
-        'link_of_pdf': full_link
+       // 'link_of_pdf': full_link
+         'link_of_pdf':'http://localhost/ged_app1/public/storage/files/nKKADKc0s0gDYiGm5A7ddmHQOljVy7eRCWP1FOly.pdf'
     };
 
 
@@ -216,11 +219,11 @@ function loadFile(event, id_file) {
     var array_response = {}
 
 
-
+    console.log('info'+indexe_file);
 
     $.ajax({
         'async': false,
-        url: 'http://192.168.0.81:5000/api_pdf',
+        url: 'http://127.0.0.1:5000/api_pdf',
         contentType: "application/json",
         data: JSON.stringify(indexe_file),
 
@@ -229,14 +232,21 @@ function loadFile(event, id_file) {
         success: function(response) {
 
 
+            
+           
 
             array_response = response.reduce(function(result, current) {
                 return Object.assign(result, current);
             }, {});
 
+
+            str = JSON.stringify(array_response, null, 4);
+           // console.log('response'+str);
+
             for (let x in indexe_file) {
                 index_pdf = x;
                 for (let i in array_response) {
+                    console.log('response'+array_response[i]);
                     if (index_pdf == i) {
                         $("#field_" + indexe_file[x]).val(array_response[i]);
                     }
@@ -395,7 +405,7 @@ function add_row_select(row) {
                         row_select1 += '<input type="text" name="nom_champ[]"  value="' + this.nom_champs + ' " class="d-none"> ';
                         row_select1 += '<input type="text" name="id_champs[]"  value="' + this.id + ' " class="d-none"> ';
                         row_select1 += '<input type="text" name="type_champ[]" value="text" class="d-none"> <div class="col-sm-6">';
-                        row_select1 += ' <input class="form-control" type="text" id="Objet_file" name="valeur[]" required>';
+                        row_select1 += ' <input class="form-control" type="text" id="field_' + this.id + '" name="valeur[]" required>';
 
 
                         row_select1 += '</div></div>';
