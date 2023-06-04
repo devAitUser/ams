@@ -153,7 +153,12 @@ function fonction_checkbox(){
 function load_name_File(event, id_file) {
     event.preventDefault();
 
+    let file = event.target.files[0].name
 
+    const Array_file = file.split(".");
+    let x = Array_file[0];
+
+    $('#Objet_file'+id_file).val(file);
  
 
 
@@ -206,8 +211,8 @@ function load_name_File(event, id_file) {
     })
 
     var data = {
-       // 'link_of_pdf': full_link
-         'link_of_pdf':'http://localhost/ged_app1/public/storage/files/nKKADKc0s0gDYiGm5A7ddmHQOljVy7eRCWP1FOly.pdf'
+      //    'link_of_pdf': full_link
+         'link_of_pdf':'http://localhost/ams/public/storage/files/0OG3AJy32pB9rPDGD8F8CAjTJmctS5dzXr5silBv.pdf'
     };
 
 
@@ -223,7 +228,7 @@ function load_name_File(event, id_file) {
 
     $.ajax({
         'async': false,
-        url: 'http://127.0.0.1:5000/api_pdf',
+        url: 'http://192.168.2.32:5000/api_pdf',
         contentType: "application/json",
         data: JSON.stringify(indexe_file),
 

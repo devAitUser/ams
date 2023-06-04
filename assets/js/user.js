@@ -39,6 +39,8 @@ $(document).ready(function() {
     var id_select = e.object.id;
     var text_select = e.object.text;
 
+    var row ='';
+
     console.log(text_select)
 
       
@@ -67,7 +69,7 @@ $(document).ready(function() {
           btn += ' <button class="btn_select" type="button" id="btn1_'+id_select+'" onclick="deselectAll'+id_select+'()"> Tout déselectionner</button>';
           btn += ' </div>';
 
-          var row = '<div id="row'+id_select +'" class="row mb-3">'
+           row = '<div id="row'+id_select +'" class="row mb-3">'
            row += '<input type="text" value="'+id_select+'" name="organigramme_id[]" hidden><label for="select_tree'+id_select+'" class="col-md-4 col-form-label text-md-end">Les Dossiers a Consulter dans  <strong> '+text_select+' </strong>  </label>'
            row += '<div class="col-md-6">'+btn
            row += '<select id="select_tree'+id_select+'"  multiple="multiple" class="form-control"  name="dossiers'+id_select+'[]">'

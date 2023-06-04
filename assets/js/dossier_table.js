@@ -67,6 +67,11 @@
                 exportOptions: {
                   columns: [ 0, 1, 2,3]
                 },
+                extend: 'csv',
+                title: 'La liste des dossiers electroniques archivé dans le systeme',
+                exportOptions: {
+                  columns: [ 0, 1, 2,3]
+                },
               },
             ],
             order: [[0, 'desc']],

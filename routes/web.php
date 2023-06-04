@@ -101,6 +101,10 @@ Route::post('/remove_champs_attributs',[App\Http\Controllers\OrganigrammeControl
 /****Dossier */
 
 
+Route::get('/csv_data',[App\Http\Controllers\DossierController::class, 'csv_data']);
+
+
+
 
 
 Route::get('/select_project/{id}',[App\Http\Controllers\DossierController::class, 'select_project'])->name('select_project');
@@ -297,4 +301,6 @@ Route::post('/fill_code_topo', [App\Http\Controllers\SalleController::class, 'fi
 /** gestion physique */
 
 
-Route::get('/gestion_physique', [App\Http\Controllers\InventaireController::class, 'gestion_physique'])->name('gestion_physique');;
+Route::get('/gestion_physique', [App\Http\Controllers\InventaireController::class, 'gestion_physique'])->name('gestion_physique');
+
+/** gestion physique */

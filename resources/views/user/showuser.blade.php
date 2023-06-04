@@ -144,7 +144,7 @@
                            @enderror
                         </div>
                      </div>
-                     <div class="row_project_panel">
+                     <div class="row_project_panel1">
                         <div id="row0" class="row mb-3">
                            <label for="select_project" class="col-md-4 col-form-label text-md-end">Les inventaires  </label>
                            <div class="col-md-6">
