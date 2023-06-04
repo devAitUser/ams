@@ -154,6 +154,8 @@ class UserController extends Controller
             $id_organigramme = $project[$i]->organigrammes_id;
             $nom_organigrammes = $organigramme->nom;
             $dossiers = json_decode($project[$i]->dossiers, true);
+
+            
         
             $les_projets[] = array('id' => $id_organigramme ,'nom_organigrammes' => $nom_organigrammes,'dossiers_select' => $dossiers , 'dossiers' => $organigramme->dossier_champ );
             $count_projet++;
