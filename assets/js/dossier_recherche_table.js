@@ -51,8 +51,8 @@ $(document).ready(function() {
         data:$(this).serialize(),
         success:function(data){
 
-        console.log(data.all_dossiers)
-
+      
+       $('#count_resultas').html(data.count_dossier);
 
       
         table.destroy();

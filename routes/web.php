@@ -102,6 +102,7 @@ Route::post('/remove_champs_attributs',[App\Http\Controllers\OrganigrammeControl
 
 
 
+Route::get('/csv_data',[App\Http\Controllers\DossierController::class, 'csv_data']);
 
 Route::get('/select_project/{id}',[App\Http\Controllers\DossierController::class, 'select_project'])->name('select_project');
 

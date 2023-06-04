@@ -162,6 +162,10 @@
          .form-control {
             height: 33.5px;
          }
+
+         .bg-resultas {
+            color: #95a0a0;
+         }
 </style>
 <script src="https://code.jquery.com/jquery-1.12.1.min.js"></script> 
 <script src="{{ asset('assets/js/recherche.js') }}"></script>
@@ -295,6 +299,11 @@
       </form>
    
 
+
+         <div class="row pt-3">
+            <div class="col-md-6 text-center d-flex justify-content-center ">  <h3 class="bg-resultas" >Resultas trouve : <span id="count_resultas">0</span>  </h3>  </div>
+            <div class="col-md-6"></div>
+         </div>
 
          <table id="organigramme_table" class=" table table-bordered text-center styled-table" >
             <thead>

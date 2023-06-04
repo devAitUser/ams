@@ -1079,6 +1079,7 @@ class DossierController extends Controller
                             "titre" => $titre,
                             "titre_fichier" => $titre_fichier,
                             "user" => $user->identifiant,
+                            
                         ];
                         $titre = "";
 
@@ -1097,6 +1098,7 @@ class DossierController extends Controller
             "all_dossiers" => $all_dossiers,
             "count" => $count_dossier,
             "check_input" => $check_input,
+            "count_dossier" => $count_dossier,
         ];
 
         return Response()->json($data);
@@ -1272,5 +1274,61 @@ class DossierController extends Controller
         
        // return redirect("/show_dossier/" . $request->id_dossier);
        return Response()->json(["etat" => true]);
+    }
+    public function csv_data(){
+       $object = (object) ['property' => 'Here we go'];
+       $array = [];
+
+
+        $data = Dossier::where([
+           
+            "organigramme_id" => 10
+        
+        ])->get();
+
+        for($i=0;$i<count($data);$i++){
+            $att = Attributs_dossier::where(["dossier_id" => $data[$i]->id])->get();
+            for($j=0;$j<count($att);$j++){
+                
+                  $sub_array[$att[$j]->nom_champs] = $att[$j]->valeur;
+            }
+            $array1[] =  (object) $sub_array;
+
+        }
+
+
+        $fileName = 'tasks.csv';
+        $tasks = $array1;
+     
+             $headers = array(
+                 "Content-type"        => "text/csv",
+                 "Content-Disposition" => "attachment; filename=$fileName",
+                 "Pragma"              => "no-cache",
+                 "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+                 "Expires"             => "0"
+             );
+     
+             $columns = array('Entite', 'FOND', 'Objet', 'salle', 'rayonnage');
+     
+             $callback = function() use($tasks, $columns) {
+                 $file = fopen('php://output', 'w');
+                 fputcsv($file, $columns);
+     
+                 foreach ($tasks as $task) {
+                     $row['Entite']  = $task->Entite;
+                     $row['FOND']    = $task->FOND;
+                     $row['Objet']    = $task->Objet;
+                     $row['salle']  = $task->salle;
+                     $row['rayonnage']  = $task->rayonnage;
+     
+                     fputcsv($file, array($row['Entite'], $row['FOND'], $row['Objet'], $row['salle'], $row['rayonnage']));
+                 }
+     
+                 fclose($file);
+             };
+     
+             return response()->stream($callback, 200, $headers);
+        
+        //return  $array1 ;
     }
 }
